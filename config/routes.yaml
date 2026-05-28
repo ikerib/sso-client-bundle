@@ -8,3 +8,11 @@ pasaia_sso_client_login:
     path: /sso/login
     controller: Pasaia\SsoClientBundle\Controller\SsoLoginController::login
     methods: [GET]
+
+# This route exists so the Symfony RouterListener (priority 32) does not throw
+# 404 before the security firewall (priority 8) can intercept real OIDC callbacks
+# (requests with ?code=...&state=...). The controller only runs on direct access.
+pasaia_sso_client_callback:
+    path: /sso/callback
+    controller: Pasaia\SsoClientBundle\Controller\SsoCallbackController::callback
+    methods: [GET]
