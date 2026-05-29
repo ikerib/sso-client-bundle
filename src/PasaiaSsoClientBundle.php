@@ -47,6 +47,8 @@ class PasaiaSsoClientBundle extends Bundle implements PrependExtensionInterface
                     // Cache the JWKS and discovery document for 1 hour to reduce SSO load.
                     'jwks_cache_time' => 3600,
                     'well_known_cache_time' => 3600,
+                    // PKCE (S256) — the SSO requires code_challenge by default for all clients.
+                    'code_challenge_method' => 'S256',
                 ],
             ],
         ]);

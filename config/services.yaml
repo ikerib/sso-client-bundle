@@ -13,3 +13,7 @@ services:
             $scopes: '%pasaia_sso_client.scopes%'
         tags:
             - { name: controller.service_arguments }
+
+    Pasaia\SsoClientBundle\Controller\SsoCallbackController:
+        tags:
+            - { name: controller.service_arguments }

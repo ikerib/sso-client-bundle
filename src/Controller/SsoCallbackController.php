@@ -29,8 +29,19 @@ final class SsoCallbackController
 
     public function callback(Request $request): Response
     {
-        // The security firewall should intercept requests with code+state.
-        // If we reach this controller, the parameters are missing — redirect to login.
+        // The security firewall intercepts requests with code+state (normal OIDC callback).
+        // If we reach this controller it means the firewall didn't handle the request:
+        // either the SSO returned an error response, or the user navigated here directly.
+        //
+        // If we redirect to login on an SSO error, the client immediately goes back to
+        // the SSO authorize endpoint, which returns the same error, creating an infinite loop.
+        if ($request->query->has('error')) {
+            return new Response(
+                sprintf('SSO error: %s — %s', $request->query->get('error'), $request->query->get('error_description', '')),
+                Response::HTTP_BAD_GATEWAY,
+            );
+        }
+
         return new RedirectResponse($this->urlGenerator->generate('pasaia_sso_client_login'));
     }
 }
