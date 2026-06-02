@@ -16,7 +16,7 @@ final class Configuration implements ConfigurationInterface
             ->children()
                 ->arrayNode('scopes')
                     ->info('OIDC scopes to request. Must include "openid" and "roles" to get Symfony roles from the SSO.')
-                    ->defaultValue(['openid', 'profile', 'email', 'roles'])
+                    ->defaultValue(['openid', 'profile', 'email', 'roles', 'ldap_profile'])
                     ->scalarPrototype()->end()
                 ->end()
                 ->scalarNode('post_logout_redirect_uri')

@@ -26,6 +26,11 @@ final class OidcUser implements UserInterface
         private readonly ?string $email,
         private readonly ?string $dni,
         private readonly string $authMethod,
+        private readonly ?string $employeeId = null,
+        private readonly ?string $description = null,
+        private readonly ?string $department = null,
+        private readonly ?string $extensionName = null,
+        private readonly ?string $preferredLanguage = null,
     ) {
     }
 
@@ -61,6 +66,11 @@ final class OidcUser implements UserInterface
             email: \is_string($claims['email'] ?? null) ? $claims['email'] : null,
             dni: \is_string($claims['dni'] ?? null) ? $claims['dni'] : null,
             authMethod: \is_string($claims['auth_method'] ?? null) ? $claims['auth_method'] : 'unknown',
+            employeeId: \is_string($claims['employee_id'] ?? null) ? $claims['employee_id'] : null,
+            description: \is_string($claims['description'] ?? null) ? $claims['description'] : null,
+            department: \is_string($claims['department'] ?? null) ? $claims['department'] : null,
+            extensionName: \is_string($claims['extension_name'] ?? null) ? $claims['extension_name'] : null,
+            preferredLanguage: \is_string($claims['preferred_language'] ?? null) ? $claims['preferred_language'] : null,
         );
     }
 
@@ -110,5 +120,30 @@ final class OidcUser implements UserInterface
     public function getAuthMethod(): string
     {
         return $this->authMethod;
+    }
+
+    public function getEmployeeId(): ?string
+    {
+        return $this->employeeId;
+    }
+
+    public function getDescription(): ?string
+    {
+        return $this->description;
+    }
+
+    public function getDepartment(): ?string
+    {
+        return $this->department;
+    }
+
+    public function getExtensionName(): ?string
+    {
+        return $this->extensionName;
+    }
+
+    public function getPreferredLanguage(): ?string
+    {
+        return $this->preferredLanguage;
     }
 }

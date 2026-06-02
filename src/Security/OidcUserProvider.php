@@ -47,11 +47,16 @@ final class OidcUserProvider implements OidcUserProviderInterface
         }
 
         $claims = [
-            'name'        => $this->extractString($userData, 'name'),
-            'email'       => $this->extractString($userData, 'email'),
-            'dni'         => $this->extractString($userData, 'dni'),
-            'auth_method' => $this->extractString($userData, 'auth_method') ?? 'password',
-            'roles'       => $this->extractArray($userData, 'roles'),
+            'name'               => $this->extractString($userData, 'name'),
+            'email'              => $this->extractString($userData, 'email'),
+            'dni'                => $this->extractString($userData, 'dni'),
+            'auth_method'        => $this->extractString($userData, 'auth_method') ?? 'password',
+            'roles'              => $this->extractArray($userData, 'roles'),
+            'employee_id'        => $this->extractString($userData, 'employee_id'),
+            'description'        => $this->extractString($userData, 'description'),
+            'department'         => $this->extractString($userData, 'department'),
+            'extension_name'     => $this->extractString($userData, 'extension_name'),
+            'preferred_language' => $this->extractString($userData, 'preferred_language'),
         ];
 
         $this->logger?->info('SSO client: user authenticated', [
