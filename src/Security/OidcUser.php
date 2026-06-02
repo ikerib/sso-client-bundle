@@ -93,6 +93,54 @@ final class OidcUser implements UserInterface
         // No credentials stored.
     }
 
+    /**
+     * @return array<string, mixed>
+     */
+    public function __serialize(): array
+    {
+        return [
+            'userIdentifier'    => $this->userIdentifier,
+            'roles'             => $this->roles,
+            'name'              => $this->name,
+            'email'             => $this->email,
+            'dni'               => $this->dni,
+            'authMethod'        => $this->authMethod,
+            'employeeId'        => $this->employeeId,
+            'description'       => $this->description,
+            'department'        => $this->department,
+            'extensionName'     => $this->extensionName,
+            'preferredLanguage' => $this->preferredLanguage,
+        ];
+    }
+
+    /**
+     * Tolerant deserialization: missing keys (e.g. sessions from older bundle versions)
+     * are silently defaulted to null so active sessions never crash after a bundle upgrade.
+     *
+     * @param array<string, mixed> $data
+     */
+    public function __unserialize(array $data): void
+    {
+        $str = static fn (mixed $v): ?string => is_string($v) && $v !== '' ? $v : null;
+
+        /** @var non-empty-string $id */
+        $id = $str($data['userIdentifier'] ?? null) ?? 'unknown';
+        $this->userIdentifier = $id;
+
+        /** @var list<string> $roles */
+        $roles = is_array($data['roles'] ?? null) ? array_values(array_filter($data['roles'], 'is_string')) : [];
+        $this->roles             = $roles ?: ['ROLE_USER'];
+        $this->name              = $str($data['name'] ?? null);
+        $this->email             = $str($data['email'] ?? null);
+        $this->dni               = $str($data['dni'] ?? null);
+        $this->authMethod        = $str($data['authMethod'] ?? null) ?? 'password';
+        $this->employeeId        = $str($data['employeeId'] ?? null);
+        $this->description       = $str($data['description'] ?? null);
+        $this->department        = $str($data['department'] ?? null);
+        $this->extensionName     = $str($data['extensionName'] ?? null);
+        $this->preferredLanguage = $str($data['preferredLanguage'] ?? null);
+    }
+
     // ── SSO-specific getters ──────────────────────────────────────────────────
 
     public function getName(): ?string
