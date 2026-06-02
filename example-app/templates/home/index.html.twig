@@ -6,7 +6,7 @@
 <h1>Ongi etorri, {{ user.name ?? user.userIdentifier }}!</h1>
 
 <div class="user-box">
-    <h2>Zure datuak (ID tokenetik)</h2>
+    <h2>Oinarrizko datuak (ID tokenetik)</h2>
     <table>
         <tr><th>Erabiltzailea</th><td><code>{{ user.userIdentifier }}</code></td></tr>
         <tr><th>Izena</th><td>{{ user.name ?? '—' }}</td></tr>
@@ -22,6 +22,20 @@
             </td>
         </tr>
     </table>
+</div>
+
+<div class="user-box">
+    <h2>LDAP profila (UserInfo endpoint)</h2>
+    <table>
+        <tr><th>Langile ID</th><td>{{ user.employeeId ?? '—' }}</td></tr>
+        <tr><th>Deskribapena</th><td>{{ user.description ?? '—' }}</td></tr>
+        <tr><th>Saila</th><td>{{ user.department ?? '—' }}</td></tr>
+        <tr><th>Luzapena</th><td>{{ user.extensionName ?? '—' }}</td></tr>
+        <tr><th>Hizkuntza</th><td>{{ user.preferredLanguage ?? '—' }}</td></tr>
+    </table>
+    <p style="margin-top:0.5rem; color:#888; font-size:0.85em;">
+        Scope <code>ldap_profile</code> eskatu bada bakarrik betetzen dira.
+    </p>
 </div>
 
 <p style="margin-top:2rem; color:#666; font-size:0.9em;">
