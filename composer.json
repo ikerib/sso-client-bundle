@@ -40,7 +40,8 @@
     },
     "extra": {
         "symfony": {
-            "allow-contrib": false
+            "allow-contrib": false,
+            "recipe-dir": "symfony/recipes"
         }
     }
 }

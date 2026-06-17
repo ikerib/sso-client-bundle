@@ -1,0 +1,18 @@
+{
+    "bundles": {
+        "Pasaia\\SsoClientBundle\\PasaiaSsoClientBundle": ["all"]
+    },
+    "env": {
+        "SSO_ISSUER_URL": "https://sso.pasaia.net",
+        "SSO_CLIENT_ID": "my-app",
+        "SSO_CLIENT_SECRET": "CHANGE_ME"
+    },
+    "post-install-output": [
+        "",
+        "  <bg=blue;fg=white>pasaia/sso-client-bundle</>",
+        "",
+        "  Sustituye <comment>SSO_CLIENT_ID</comment> y <comment>SSO_CLIENT_SECRET</comment> en .env.local con",
+        "  los valores reales del SSO Municipal Pasaia.",
+        ""
+    ]
+}

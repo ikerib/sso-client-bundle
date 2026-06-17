@@ -1,0 +1,8 @@
+drenso_oidc:
+    clients:
+        default:
+            well_known_url: '%env(SSO_ISSUER_URL)%/.well-known/openid-configuration'
+            client_id: '%env(SSO_CLIENT_ID)%'
+            client_secret: '%env(SSO_CLIENT_SECRET)%'
+            # redirect_route, jwks_cache_time, well_known_cache_time y code_challenge_method
+            # son configurados automáticamente por pasaia/sso-client-bundle vía PrependExtensionInterface.
