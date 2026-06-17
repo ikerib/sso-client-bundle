@@ -44,6 +44,8 @@ class PasaiaSsoClientBundle extends Bundle implements PrependExtensionInterface
                     'well_known_url' => '%env(SSO_ISSUER_URL)%/.well-known/openid-configuration',
                     'client_id' => '%env(SSO_CLIENT_ID)%',
                     'client_secret' => '%env(SSO_CLIENT_SECRET)%',
+                    // Must match the firewall check_path and the bundle's /sso/callback route.
+                    'redirect_route' => '/sso/callback',
                     // Cache the JWKS and discovery document for 1 hour to reduce SSO load.
                     'jwks_cache_time' => 3600,
                     'well_known_cache_time' => 3600,
